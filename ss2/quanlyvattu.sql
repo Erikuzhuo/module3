@@ -1,0 +1,81 @@
+create database QuanLyVatTu;
+use QuanLyVatTu;
+
+CREATE TABLE PhieuXuat (
+    SoPX INT PRIMARY KEY,
+    NgayXuat DATE
+);
+
+CREATE TABLE VatTu (
+    MaVTU INT PRIMARY KEY,
+    TenVTU VARCHAR(100)
+);
+
+CREATE TABLE PhieuNhap (
+    SoPN INT PRIMARY KEY,
+    NgayNhap DATE
+);
+
+CREATE TABLE DonDH (
+    SoDH INT PRIMARY KEY,
+    NgayDH DATE
+);
+
+CREATE TABLE NhaCC (
+    MaNCC INT PRIMARY KEY,
+    TenNCC VARCHAR(100),
+    DiaChi TEXT
+);
+
+
+CREATE TABLE CT_PhieuXuat (
+    SoPX INT,
+    MaVTU INT,
+    DGXuat DECIMAL(10 , 2 ),
+    SLXuat INT,
+    PRIMARY KEY (SoPX , MaVTU),
+    FOREIGN KEY (SoPX)
+        REFERENCES PhieuXuat (SoPX),
+    FOREIGN KEY (MaVTU)
+        REFERENCES VatTu (MaVTU)
+);
+
+CREATE TABLE CT_PhieuNhap (
+    SoPN INT,
+    MaVTU INT,
+    DGNhap DECIMAL(10 , 2 ),
+    SLNhap INT,
+    PRIMARY KEY (SoPN , MaVTU),
+    FOREIGN KEY (SoPN)
+        REFERENCES PhieuNhap (SoPN),
+    FOREIGN KEY (MaVTU)
+        REFERENCES VatTu (MaVTU)
+);
+
+CREATE TABLE CT_DonDH (
+    SoDH INT,
+    MaVTU INT,
+    PRIMARY KEY (SoDH , MaVTU),
+    FOREIGN KEY (SoDH)
+        REFERENCES DonDH (SoDH),
+    FOREIGN KEY (MaVTU)
+        REFERENCES VatTu (MaVTU)
+);
+
+CREATE TABLE SDT_NCC (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    MaNCC INT,
+    SoDT VARCHAR(10),
+    FOREIGN KEY (MaNCC)
+        REFERENCES NhaCC (MaNCC)
+);
+
+CREATE TABLE CungCap (
+    MaNCC INT,
+    SoDH INT,
+    PRIMARY KEY (MaNCC , SoDH),
+    FOREIGN KEY (MaNCC)
+        REFERENCES NhaCC (MaNCC),
+    FOREIGN KEY (SoDH)
+        REFERENCES DonDH (SoDH)
+);
