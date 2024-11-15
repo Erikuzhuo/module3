@@ -141,4 +141,3 @@ FROM
         JOIN
     Subjects sub ON m.SubID = sub.SubID
 ORDER BY m.Mark DESC , s.StudentName ASC;
-
