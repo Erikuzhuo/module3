@@ -177,3 +177,26 @@ HAVING AVG(mark) >= ALL (SELECT
     FROM
         Mark
     GROUP BY Mark.StudentId);
+    
+SELECT 
+    *
+FROM
+    Subjects
+WHERE
+    credit = (SELECT 
+            MAX(Credit)
+        FROM
+            Subjects);
+    
+    
+SELECT 
+    s.*, m.mark
+FROM
+    Subjects s
+        JOIN
+    Mark m ON s.SubID = m.SubID
+WHERE
+    mark = (SELECT 
+            MAX(mark)
+        FROM
+            mark);
