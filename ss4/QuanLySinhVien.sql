@@ -188,7 +188,6 @@ WHERE
         FROM
             Subjects);
     
-    
 SELECT 
     s.*, m.mark
 FROM
@@ -200,3 +199,10 @@ WHERE
             MAX(mark)
         FROM
             mark);
+            
+Select s.StudentName, avg(mark)
+from student s
+join mark m
+on m.StudentID = s.StudentID
+group by StudentName
+order by avg(mark) desc;
