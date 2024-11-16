@@ -65,4 +65,11 @@ FROM
     orderdetail od ON od.oID = o.oID
         JOIN
     product p ON od.pID = p.pID;
+    
+    Select c.cName, od.oID
+    from Customer c
+    left join orders od
+    on od.cID = c.cID
+    where oID is null;
+    
 
