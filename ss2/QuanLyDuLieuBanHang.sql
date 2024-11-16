@@ -54,3 +54,15 @@ FROM
         JOIN
     Product p ON od.pID = p.pID
 GROUP BY o.oID;
+
+SELECT 
+    c.cName AS Customer, p.pName AS Product, od.odQTY AS Qty
+FROM
+    Customer c
+        JOIN
+    orders o ON o.cID = c.cID
+        LEFT JOIN
+    orderdetail od ON od.oID = o.oID
+        JOIN
+    product p ON od.pID = p.pID;
+
